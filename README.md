@@ -1,24 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Web-palvelinohjelmointi syksy 2022](https://github.com/mluukkai/WebPalvelinohjelmointi2022/blob/main/wadror.md) tehtävien palautus
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Viikko 1
+[linkki sovellukseen](https://markku63-ratebeer.fly.dev/breweries)
