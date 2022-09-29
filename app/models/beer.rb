@@ -3,6 +3,6 @@ class Beer < ApplicationRecord
   has_many :ratings
 
   def average_rating
-    ratings.map { |r| r.score }.sum / ratings.count.to_f
+    ratings.average(:score)
   end
 end
