@@ -14,4 +14,15 @@
     <%= beer.brewery.name %>
   </p>
 
+  <p>
+    Beer has 
+    <% if beer.ratings.empty? %>
+      not yet been rated!
+    <% else %>
+      <%= beer.ratings.count %>
+      ratings with an average of
+      <%= beer.average_rating %>
+    <% end %>
+  </p>
+
 </div>
