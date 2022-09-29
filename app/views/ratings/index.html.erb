@@ -1,3 +1,9 @@
-<h2>List of ratings</h2>
+<p style="color: green"><%= notice %></p>
 
-<p>To be completed ...</p>
+<h2>List of ratings</h2>
+<ul>
+ <% @ratings.each do |rating| %>
+   <li> <%= rating %> </li>
+ <% end %>
+</ul>
+<p>Number of ratings: <%= @ratings.count %></p>
