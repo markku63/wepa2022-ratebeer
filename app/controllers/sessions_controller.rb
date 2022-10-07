@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     # haetaan usernamea vastaava käyttäjä tietokannasta
     user = User.find_by username: params[:username]
     # tarkastetaan että käyttäjä on olemassa ja salasana on oikea
-    if user && user.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       # talletetaan sessioon kirjautuneen käytttäjän id (jos käyttäjä on olemassa)
       session[:user_id] = user.id if user
       # uudelleenohjataan käyttäjä omalle sivulleen
