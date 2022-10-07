@@ -6,7 +6,14 @@ class Brewery < ApplicationRecord
 
   validates :name, presence: true
   validates :year, numericality: { only_integer: true,
-                                   in: 1040..2022 }
+                                   greater_than_or_equal_to: 1040 }
+  validate :not_in_future
+
+  def not_in_future
+    return unless year.present? && year > Time.now.year
+
+    errors.add(:year, "can't be in the future")
+  end
 
   def print_report
     puts name
