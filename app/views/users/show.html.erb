@@ -6,7 +6,8 @@
 Has made <%= @user.ratings.count %> ratings,
 average rating <%= @user.average_rating %>
 </p>
-<h2>ratings</h2>
+
+<h2>Ratings</h2>
 <ul>
 <% @user.ratings.each do |rating| %>
   <li>
@@ -19,6 +20,16 @@ average rating <%= @user.average_rating %>
   </li>
 <% end %>
 </ul>
+
+<h2>Memberships</h2>
+<ul>
+<%= @user.beer_clubs.each do |beer_club| %>
+  <li>
+    <%= beer_club.name %>
+  </li>
+<% end %>
+</ul>
+
 <div>
   <% if @user == current_user %>
     <%= link_to "Edit this user", edit_user_path(@user) %> |

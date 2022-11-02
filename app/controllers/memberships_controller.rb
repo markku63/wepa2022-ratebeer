@@ -9,6 +9,14 @@ class MembershipsController < ApplicationController
   end
 
   def create
-    raise
+    @membership = Membership.new params.require(:membership).permit(:beer_club_id)
+    @membership.user = current_user
+
+    if @membership.save
+      redirect_to user_path current_user
+    else
+      @memberships = Membership.all
+      render :new, status: :unprocessable_entity
+    end
   end
 end

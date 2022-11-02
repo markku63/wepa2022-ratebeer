@@ -19,7 +19,7 @@
     <ul>
       <% beer_club.members.each do |member| %>
         <li>
-        <%= link_to member.username user_path(member.id) %>
+          <%= member.username %>
         </li>
       <%end%>
     </ul>
