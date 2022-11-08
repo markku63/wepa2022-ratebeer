@@ -9,25 +9,28 @@ average rating <%= @user.average_rating %>
 
 <h2>Ratings</h2>
 <ul>
-<% @user.ratings.each do |rating| %>
-  <li>
-    <%= rating %>
-    <% if @user == current_user %>
-      <%= link_to "Delete", rating, data: {
+  <% @user.ratings.each do |rating| %>
+    <li>
+      <%= rating %>
+      <% if @user == current_user %>
+        <%= link_to "Delete", rating, data: {
               'turbo-method': :delete
             } %>
-    <% end %>
-  </li>
-<% end %>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
 
 <h2>Memberships</h2>
 <ul>
-<%= @user.beer_clubs.each do |beer_club| %>
-  <li>
-    <%= beer_club.name %>
-  </li>
-<% end %>
+  <%= @user.beer_clubs.each do |beer_club| %>
+    <li>
+      <%= beer_club.name %>
+      <% if @user == current_user %>
+        <!-- delete membership -->
+      <% end %>
+    </li>
+  <% end %>
 </ul>
 
 <div>

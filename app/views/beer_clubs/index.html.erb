@@ -3,12 +3,13 @@
 <h1>Beer clubs</h1>
 
 <div id="beer_clubs">
+  <ul>
   <% @beer_clubs.each do |beer_club| %>
-    <%= render beer_club %>
-    <p>
-      <%= link_to "Show this beer club", beer_club %>
-    </p>
+    <li>
+      <%= link_to beer_club.name, beer_club %>, <%= beer_club.city %>
+    </li>
   <% end %>
+  </ul>
 </div>
 
 <%= link_to "New beer club", new_beer_club_path %>
