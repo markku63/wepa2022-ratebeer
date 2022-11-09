@@ -5,7 +5,7 @@ class MembershipsController < ApplicationController
 
   def new
     @membership = Membership.new
-    @beer_clubs = BeerClub.all
+    @beer_clubs = BeerClub.all - current_user.beer_clubs
   end
 
   def create

@@ -39,8 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_111540) do
     t.integer "beer_club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"user\", \"beer_club\"", name: "index_memberships_on_user_and_beer_club", unique: true
     t.index ["beer_club_id"], name: "index_memberships_on_beer_club_id"
+    t.index ["user_id", "beer_club_id"], name: "index_memberships_on_user_id_and_beer_club_id", unique: true
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
