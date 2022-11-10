@@ -5,7 +5,7 @@ FactoryBot.define do
     password_confirmation { "Foobar1" }
   end
 
-  factory :brewery  do
+  factory :brewery do
     name { "anonymous" }
     year { 1900 }
   end

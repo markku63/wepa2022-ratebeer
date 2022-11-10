@@ -51,16 +51,17 @@ RSpec.describe User, type: :model do
 
       expect(user.favorite_beer).to eq(best)
     end
-    def create_beer_with_rating(object, score)
-      beer = FactoryBot.create(:beer)
-      FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
-      beer
+  end
+
+  describe "favorite style" do
+    let(:user){ FactoryBot.create(:user) }
+
+    it "has a method for determining favorite style" do
+      expect(user).to respond_to(:favorite_style)
     end
 
-    def create_beers_with_many_ratings(object, *scores)
-      scores.each do |score|
-        create_beer_with_rating(object, score)
-      end
+    it "without ratings does not have a favorite style" do
+      expect(user.favorite_beer).to eq(nil)
     end
   end
 
@@ -79,5 +80,17 @@ RSpec.describe User, type: :model do
       expect(user.ratings.count).to eq(2)
       expect(user.average_rating).to eq(15.0)
     end
+  end
+end # describe user
+
+def create_beer_with_rating(object, score)
+  beer = FactoryBot.create(:beer)
+  FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
+  beer
+end
+
+def create_beers_with_many_ratings(object, *scores)
+  scores.each do |score|
+    create_beer_with_rating(object, score)
   end
 end
