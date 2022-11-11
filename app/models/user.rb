@@ -21,5 +21,12 @@ class User < ApplicationRecord
   end
 
   def favorite_style
+    return nil if ratings.empty?
+
+    beers.find_by_sql(["SELECT beers.style, AVG(ratings.score) AS avg_score
+      FROM beers INNER JOIN ratings ON beers.id = ratings.beer_id
+      WHERE ratings.user_id = ?
+      GROUP BY beers.style ORDER BY avg_score DESC
+      LIMIT 1", id])[0].style
   end
 end
