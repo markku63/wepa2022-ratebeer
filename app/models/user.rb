@@ -29,4 +29,10 @@ class User < ApplicationRecord
       GROUP BY beers.style ORDER BY avg_score DESC
       LIMIT 1", id])[0].style
   end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    ratings.first.beer.brewery
+  end
 end

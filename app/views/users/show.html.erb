@@ -1,44 +1,45 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Username:</h1>
-<p><%= @user.username %></p>
-<p>
-Has made <%= @user.ratings.count %> ratings,
-average rating <%= @user.average_rating %>
-</p>
+<h2><%= @user.username %></h2>
 
-<h2>Ratings</h2>
-<ul>
-  <% @user.ratings.each do |rating| %>
-    <li>
-      <%= rating %>
-      <% if @user == current_user %>
-        <%= link_to "Delete", rating, data: {
-              'turbo-method': :delete
-            } %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if @user.ratings.empty? %>
+  <p>Has not yet made ratings</p>
+<% else %>
+  Has made <%= pluralize(@user.ratings.count, 'rating') %>,
+  average rating <%= @user.average_rating %>
 
-<h2>Memberships</h2>
-<ul>
-  <%= @user.beer_clubs.each do |beer_club| %>
-    <li>
-      <%= beer_club.name %>
-      <% if @user == current_user %>
-        <!-- delete membership -->
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <h4>Ratings</h4>
+  <ul>
+    <% @user.ratings.each do |rating| %>
+      <li>
+        <%= rating %>
+        <% if @user == current_user %>
+          <%= link_to "Delete", rating, data: {
+                'turbo-method': :delete
+              } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
-<div>
-  <% if @user == current_user %>
-    <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <% end %>
-  <%= link_to "Back to users", users_path %>
-  <% if @user == current_user %>
+<% if @user.beer_clubs.empty? %>
+  <p>Has not joined any club</p>
+<% else %>
+  <h4>Memberships</h4>
+  <ul>
+    <%= @user.beer_clubs.each do |beer_club| %>
+      <li>
+        <%= link_to beer_club.name, beer_club %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @user == current_user %>
+  <div>
+    <%= link_to "Change password", edit_user_path(@user) %> | 
     <%= button_to "Destroy this user", @user, method: :delete %>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
