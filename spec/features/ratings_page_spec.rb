@@ -17,6 +17,10 @@ describe "Rating" do
     select('iso 3', from: 'rating[beer_id]')
     fill_in('rating[score]', with: '15')
 
+    expect{
+      click_button "Create Rating"
+    }.to change{ Rating.count }.from(0).to(1)
+
     expect(user.ratings.count).to eq(1)
     expect(beer1.ratings.count).to eq(1)
     expect(beer1.average_rating).to eq(15.0)

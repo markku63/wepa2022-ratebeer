@@ -28,7 +28,7 @@
 <% else %>
   <h4>Memberships</h4>
   <ul>
-    <%= @user.beer_clubs.each do |beer_club| %>
+    <% @user.beer_clubs.each do |beer_club| %>
       <li>
         <%= link_to beer_club.name, beer_club %>
       </li>
