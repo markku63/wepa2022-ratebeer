@@ -60,5 +60,17 @@ describe "User" do
         page.find('li', text: 'iso 3').click_link('Delete')
       }.to change{ Rating.count }.by(-1)
     end
+
+    it "shows user's favorite beer style" do
+      visit user_path(@user)
+
+      expect(page).to have_content 'Favorite style: Lager'
+    end
+
+    it "shows user's favorite brewery" do
+      visit user_path(@user)
+
+      expect(page).to have_content 'Favorite brewery: Koff'
+    end
   end
 end
