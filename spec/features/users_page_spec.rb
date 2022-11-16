@@ -30,7 +30,7 @@ describe "User" do
 
       expect{
         click_button('Create User')
-      }.to change{User.count}.by(1)
+      }.to change{ User.count }.by(1)
     end
   end
 
@@ -51,6 +51,14 @@ describe "User" do
       visit user_path(user2)
       expect(page).to have_content user2.username
       expect(page).to have_content 'Has made 2 ratings'
+    end
+
+    it "allows signed in user to delete ratings" do
+      sign_in(username: 'Brian', password: 'Secret55')
+
+      expect{
+        page.find('li', text: 'iso 3').click_link('Delete')
+      }.to change{ Rating.count }.by(-1)
     end
   end
 end
