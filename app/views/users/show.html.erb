@@ -21,6 +21,9 @@
       </li>
     <% end %>
   </ul>
+  <h4>Favorites</h4>
+  <p>Favorite style: <%= @user.favorite_style %></p>
+  <p>Favorite brewery: <%= @user.favorite_brewery %></p>
 <% end %>
 
 <% if @user.beer_clubs.empty? %>

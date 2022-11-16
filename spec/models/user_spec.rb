@@ -93,7 +93,7 @@ RSpec.describe User, type: :model do
     it "is the only rated if only one rating" do
       beer = create_beer_with_rating({ user: user }, 20)
 
-      expect(user.favorite_brewery).to eq(beer.brewery)
+      expect(user.favorite_brewery).to eq(beer.brewery.name)
     end
 
     it "is the brewery with highest average rating if several rated" do
@@ -103,8 +103,12 @@ RSpec.describe User, type: :model do
       beer2 = FactoryBot.create(:beer, brewery: brewery1)
       beer3 = FactoryBot.create(:beer, brewery: brewery2)
       beer4 = FactoryBot.create(:beer, brewery: brewery2)
+      FactoryBot.create(:rating, beer: beer1, score: 5, user: user)
+      FactoryBot.create(:rating, beer: beer2, score: 6, user: user)
+      FactoryBot.create(:rating, beer: beer3, score: 7, user: user)
+      FactoryBot.create(:rating, beer: beer4, score: 8, user: user)
 
-      expect(user.favorite_brewery).to eq(brewery1)
+      expect(user.favorite_brewery).to eq(brewery2.name)
     end
   end
 

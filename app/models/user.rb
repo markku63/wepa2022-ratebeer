@@ -33,6 +33,11 @@ class User < ApplicationRecord
   def favorite_brewery
     return nil if ratings.empty?
 
-    ratings.first.beer.brewery
+    beers.find_by_sql(["SELECT breweries.name, AVG(ratings.score) AS avg_score
+      FROM breweries, ratings, beers
+      WHERE beers.id = ratings.beer_id AND beers.brewery_id = breweries.id AND ratings.user_id = ?
+      GROUP BY breweries.name
+      ORDER BY avg_score DESC
+      LIMIT 1", id])[0].name
   end
 end
