@@ -32,6 +32,13 @@ describe "User" do
         click_button('Create User')
       }.to change{ User.count }.by(1)
     end
+
+    it "can sign out" do
+      sign_in(username: "Pekka", password: "Foobar1")
+      click_link('Sign out')
+
+      expect(page).to have_content('Sign in')
+    end
   end
 
   describe "page" do
