@@ -28,6 +28,12 @@ describe "Places" do
   end
 
   it "if none are returned, a notice is shown" do
+    allow(BeermappingApi).to receive(:places_in).with("turku").and_return([])
+
     visit places_path
+    fill_in('city', with: 'turku')
+    click_button "Search"
+
+    expect(page).to have_content "No locations in turku"
   end
 end
