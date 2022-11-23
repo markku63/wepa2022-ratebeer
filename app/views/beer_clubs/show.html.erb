@@ -3,9 +3,11 @@
 <%= render @beer_club %>
 
 <% if current_user %>
-  <%= form_with(model: @membership) do |form| %>
-  <%= form.hidden_field :beer_club_id, value: @beer_club_id %>
-  <%= form.submit "Join this club" %>
+  <% if @membership %>
+    <%= form_with(model: @membership) do |form| %>
+    <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
+    <%= form.submit "Join this club" %>
+    <% end %>
   <% end %>
 
   <div>

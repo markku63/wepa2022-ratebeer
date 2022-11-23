@@ -21,7 +21,7 @@ class MembershipsController < ApplicationController
     @membership.user = current_user
 
     if @membership.save
-      redirect_to membership_url(@membership), notice: "Membership was succesfully created"
+      redirect_to beer_club_url(@membership.beer_club), notice: "#{current_user.username} welcome to the club"
     else
       @memberships = Membership.all
       render :new, status: :unprocessable_entity
