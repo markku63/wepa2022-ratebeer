@@ -28,7 +28,7 @@
     <%= form.label :brewery_id, style: "display: block" %>
     <%= form.select(
           :brewery_id,
-          options_from_collection_for_select(@breweries, :id, :name)
+          options_from_collection_for_select(@breweries, :id, :name, selected: @beer.brewery_id)
         ) %>
   </div>
 
