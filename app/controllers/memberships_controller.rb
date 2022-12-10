@@ -28,6 +28,15 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path current_user, notice: "Membership has ended" }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_membership
