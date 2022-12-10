@@ -6,6 +6,7 @@ describe "Beers page" do
   before :each do
     FactoryBot.create :user
     FactoryBot.create :brewery
+    FactoryBot.create :style
     sign_in(username: "Pekka", password: "Foobar1")
   end
 
