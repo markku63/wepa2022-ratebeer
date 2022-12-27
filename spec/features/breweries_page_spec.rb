@@ -5,7 +5,7 @@ describe "Breweries page" do
     visit breweries_path
 
     expect(page).to have_content 'Breweries'
-    expect(page).to have_content 'Number of breweries: 0'
+    expect(page).to have_content 'Number of active breweries: 0'
   end
 
   describe "when breweries exist" do
@@ -13,14 +13,14 @@ describe "Breweries page" do
       @breweries = ["Koff", "Karjala", "Schenkerla"]
       year = 1896
       @breweries.each do |brewery_name|
-        FactoryBot.create(:brewery, name: brewery_name, year: year+=1)
+        FactoryBot.create(:brewery, name: brewery_name, year: year+=1, active: true)
       end
 
       visit breweries_path
     end
 
     it "lists the existing breweries and their total number" do
-      expect(page).to have_content "Number of breweries: #{@breweries.count}"
+      expect(page).to have_content "Number of active breweries: #{@breweries.count}"
 
       @breweries.each do |brewery_name|
         expect(page).to have_content brewery_name

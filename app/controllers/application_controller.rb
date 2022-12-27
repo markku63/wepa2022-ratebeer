@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_signed_in
     redirect_to signin_path, notice: 'you should be signed in' unless current_user
   end
+
+  def ensure_that_admin
+    redirect_to breweries_path, notice: 'yuou should be an admin' unless current_user.admin
+  end
 end
