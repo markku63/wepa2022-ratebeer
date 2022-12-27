@@ -21,7 +21,7 @@
     <% else %>
       <%= pluralize(beer.ratings.count, 'rating') %>
       with an average of
-      <%= beer.average_rating %>
+      <%= round(beer.average_rating) %>
     <% end %>
   </p>
 

@@ -4,7 +4,7 @@
   <p>Has not yet made ratings</p>
 <% else %>
   Has made <%= pluralize(@user.ratings.count, 'rating') %>,
-  average rating <%= @user.average_rating %>
+  average rating <%= round(@user.average_rating) %>
 
   <h4>Ratings</h4>
   <ul>
@@ -38,9 +38,6 @@
 <% end %>
 
 <% if @user == current_user %>
-  <div>
-    <%= link_to "Change password", edit_user_path(@user), class:'btn btn-primary' %>
-    <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger" %>
-  </div>
+  <%= edit_and_destroy_buttons(@user) %>
 <% end %>
 

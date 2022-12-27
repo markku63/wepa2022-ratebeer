@@ -9,6 +9,9 @@ class Brewery < ApplicationRecord
                                    greater_than_or_equal_to: 1040 }
   validate :not_in_future
 
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil, false] }
+
   def not_in_future
     return unless year.present? && year > Time.now.year
 
