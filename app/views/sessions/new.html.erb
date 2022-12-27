@@ -3,5 +3,5 @@
 <%= form_with url: session_path, method: :post do |form| %>
   Username <%= form.text_field :username %>
   Password <%= form.password_field :password %>
-  <%= form.submit "Log in" %>
+  <%= form.submit "Log in", class: "btn btn-primary" %>
 <% end %>

@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h2>List of ratings</h2>
 <ul>
   <% @ratings.each do |rating| %>
@@ -11,5 +9,5 @@
 </ul>
 <p>Number of ratings: <%= @ratings.count %></p>
 <% if current_user %>
-  <%= link_to "New rating", new_rating_path %>
+  <%= link_to "New rating", new_rating_path, class: "btn btn-primary" %>
 <% end %>
