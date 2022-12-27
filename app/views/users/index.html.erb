@@ -1,10 +1,8 @@
 <h1>Users</h1>
 
-<div id="users">
+<div id="users" class="list-group">
   <% @users.each do |user| %>
-    <p>
-      <%= link_to user.username, user %>
-    </p>
+      <%= link_to user.username, user, class: "list-group-item list-group-item-action" %>
   <% end %>
 </div>
 
