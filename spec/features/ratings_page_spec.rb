@@ -26,14 +26,11 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "page shows all ratings and total number" do
-    create_beers_with_many_ratings({user: user}, 10, 15, 20, 40)
+  it "page shows most active rater" do
+    style = FactoryBot.create :style
+    create_beers_with_many_ratings({ user: user, style: style }, 10, 15, 20, 40)
     visit ratings_path
 
-    expect(page).to have_content 'anonymous 10 Pekka'
-    expect(page).to have_content 'anonymous 15 Pekka'
-    expect(page).to have_content 'anonymous 20 Pekka'
-    expect(page).to have_content 'anonymous 40 Pekka'
-    expect(page).to have_content 'Number of ratings: 4'
+    expect(page).to have_content 'Pekka 4'
   end
 end

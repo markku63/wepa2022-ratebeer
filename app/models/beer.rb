@@ -12,4 +12,15 @@ class Beer < ApplicationRecord
   def to_s
     "#{brewery.name} #{name}"
   end
+
+  def average
+    return 0 if ratings.empty?
+
+    ratings.map(:score).sum / ratings.count.to_f
+  end
+
+  def self.top(amount)
+    sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -(b.average_rating || 0) }
+    sorted_by_rating_in_desc_order[0, amount]
+  end
 end

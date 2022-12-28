@@ -6,13 +6,14 @@ Rails.application.routes.draw do
   resources :breweries do
     post 'toggle_activity', on: :member
   end
-  
+  resources :users  do
+    post 'toggle_closed', on: :member
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   root "breweries#index"
 
-  get 'kaikki_bisset', to: 'beers#index'
   # get 'ratings', to: 'ratings#index'
   # get 'ratings/new', to: 'ratings#new'
   # post 'ratings', to: 'ratings#create'

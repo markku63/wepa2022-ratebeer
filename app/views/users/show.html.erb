@@ -1,5 +1,9 @@
 <h2><%= @user.username %></h2>
 
+<% if @user.closed? %>
+  <div class="badge text-bg-danger">account closed</div>
+<% end %>
+
 <% if @user.ratings.empty? %>
   <p>Has not yet made ratings</p>
 <% else %>
@@ -20,8 +24,8 @@
     <% end %>
   </ul>
   <h4>Favorites</h4>
-  <p>Favorite style: <%= @user.favorite_style %></p>
-  <p>Favorite brewery: <%= @user.favorite_brewery %></p>
+  <p>Favorite style: <%= link_to @user.favorite_style.name, @user.favorite_style %></p>
+  <p>Favorite brewery: <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %></p>
 <% end %>
 
 <% if @user.beer_clubs.empty? %>
@@ -41,3 +45,8 @@
   <%= edit_and_destroy_buttons(@user) %>
 <% end %>
 
+<div>
+  <% if current_user && current_user.admin? %>    
+    <%= link_to (@user.closed? ? "activate account" : "close account"), toggle_closed_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-primary" %>
+  <% end %>
+</div>

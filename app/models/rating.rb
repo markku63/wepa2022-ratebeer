@@ -8,4 +8,6 @@ class Rating < ApplicationRecord
   def to_s
     "#{beer.name} #{score}"
   end
+
+  scope :recent, -> { order("created_at DESC").limit(5) }
 end

@@ -2,7 +2,12 @@
 
 <div id="users" class="list-group">
   <% @users.each do |user| %>
+    <p>
       <%= link_to user.username, user, class: "list-group-item list-group-item-action" %>
+      <% if user.closed? %>
+        <span class="badge text-bg-danger">account closed</span>
+      <% end %>
+    </p>
   <% end %>
 </div>
 

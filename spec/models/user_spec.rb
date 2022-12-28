@@ -32,6 +32,8 @@ RSpec.describe User, type: :model do
 
   describe "favorite beer" do
     let(:user){ FactoryBot.create(:user) }
+    let(:lager){ FactoryBot.create(:style) }
+    let(:pils){ FactoryBot.create(:style, name: 'Pils') }
 
     it "has method for determining one" do
       expect(user).to respond_to(:favorite_beer)
@@ -42,14 +44,15 @@ RSpec.describe User, type: :model do
     end
 
     it "is the only rated if only one rating" do
-      beer = create_beer_with_rating({ user: user }, 20)
+      beer = FactoryBot.create(:beer)
+      FactoryBot.create(:rating, score: 20, beer: beer, user: user)
 
       expect(user.favorite_beer).to eq(beer)
     end
 
     it "is the one with highest rating if several rated" do
-      create_beers_with_many_ratings({ user: user }, 10, 20, 15, 7, 9)
-      best = create_beer_with_rating({ user: user }, 25)
+      create_beers_with_many_ratings({ user: user, style: lager }, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating({ user: user, style: lager }, 25)
 
       expect(user.favorite_beer).to eq(best)
     end
@@ -57,6 +60,8 @@ RSpec.describe User, type: :model do
 
   describe "favorite style" do
     let(:user){ FactoryBot.create(:user) }
+    let(:lager){ FactoryBot.create(:style) }
+    let(:pils){ FactoryBot.create(:style, name: 'Pils') }
 
     it "has a method for determining favorite style" do
       expect(user).to respond_to(:favorite_style)
@@ -67,23 +72,24 @@ RSpec.describe User, type: :model do
     end
 
     it "is the only rated if only one rating" do
-      beer = create_beer_with_rating({ user: user }, 20)
+      beer = FactoryBot.create(:beer, style: pils)
+      FactoryBot.create(:rating, score: 20, beer: beer, user: user)
 
-      expect(user.favorite_style).to eq(beer.style.name)
+      expect(user.favorite_style).to eq(beer.style)
     end
 
     it "is the style with highest average rating if several rated" do
-      create_beers_with_many_ratings({ user: user }, 10, 20, 15, 7, 9)
-      style = FactoryBot.create(:style, name: 'Porter')
-      best = FactoryBot.create(:beer, name: 'Guinness', style: style)
-      FactoryBot.create(:rating, beer: best, score: 50, user: user)
-
-      expect(user.favorite_style).to eq(best.style.name)
+      create_beers_with_many_ratings({ user: user, style: lager }, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating({ user: user, style: pils }, 25 )
+      
+      expect(user.favorite_style).to eq(best.style)
     end
   end
 
   describe "favorite brewery" do
     let(:user){ FactoryBot.create(:user) }
+    let(:lager){ FactoryBot.create(:style) }
+    let(:pils){ FactoryBot.create(:style, name: 'Pils') }
 
     it "has a method for determining favorite brewery" do
       expect(user).to respond_to(:favorite_brewery)
@@ -94,24 +100,17 @@ RSpec.describe User, type: :model do
     end
 
     it "is the only rated if only one rating" do
-      beer = create_beer_with_rating({ user: user }, 20)
+      beer = FactoryBot.create(:beer, style: pils)
+      FactoryBot.create(:rating, score: 20, beer: beer, user: user)
 
-      expect(user.favorite_brewery).to eq(beer.brewery.name)
+      expect(user.favorite_brewery).to eq(beer.brewery)
     end
 
     it "is the brewery with highest average rating if several rated" do
-      brewery1 = FactoryBot.create(:brewery, name: "Brewery1")
-      brewery2 = FactoryBot.create(:brewery, name: "Brewery2")
-      beer1 = FactoryBot.create(:beer, brewery: brewery1)
-      beer2 = FactoryBot.create(:beer, brewery: brewery1)
-      beer3 = FactoryBot.create(:beer, brewery: brewery2)
-      beer4 = FactoryBot.create(:beer, brewery: brewery2)
-      FactoryBot.create(:rating, beer: beer1, score: 5, user: user)
-      FactoryBot.create(:rating, beer: beer2, score: 6, user: user)
-      FactoryBot.create(:rating, beer: beer3, score: 7, user: user)
-      FactoryBot.create(:rating, beer: beer4, score: 8, user: user)
+      create_beers_with_many_ratings({ user: user, style: lager }, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating({ user: user, style: pils }, 25 )
 
-      expect(user.favorite_brewery).to eq(brewery2.name)
+      expect(user.favorite_brewery).to eq(best.brewery)
     end
   end
 
